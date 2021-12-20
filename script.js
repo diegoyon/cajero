@@ -1,9 +1,11 @@
-class Billete{
-  constructor(v,c){
-    this.valor = v;
-    this.cantidad = c;
-  }
-}
+let imagenes = [];
+imagenes["200"] = "billete200.jpg";
+imagenes["100"] = "billete100.jpg";
+imagenes["50"] = "billete50.jpg";
+imagenes["20"] = "billete20.jpg";
+imagenes["10"] = "billete10.jpg";
+imagenes["5"] = "billete5.jpg";
+imagenes["1"] = "billete1.jpg";
 
 let caja = [];
 caja.push(new Billete(200, 3));
@@ -22,6 +24,7 @@ let resultado = document.getElementById("resultado");
 
 let b = document.getElementById("extraer");
 b.addEventListener("click", entregarDinero);
+
 
 function entregarDinero(){
   let entregado = [];
@@ -49,7 +52,11 @@ function entregarDinero(){
     resultado.innerHTML = "";
     for(let e of entregado){
       if(e.cantidad > 0){
-        resultado.innerHTML += + e.cantidad + " billetes de $" + e.valor + "<br/>";
+        
+        for(let i=0; i<e.cantidad; i++){
+          resultado.innerHTML += "<img src=" + e.imagen.src + " height='100'/>";
+        }
+        resultado.innerHTML += "<br/>";
       }
     }
   }
