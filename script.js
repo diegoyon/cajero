@@ -6,10 +6,13 @@ class Billete{
 }
 
 let caja = [];
-let entregado = [];
+caja.push(new Billete(200, 3));
+caja.push(new Billete(100, 3));
 caja.push(new Billete(50, 3));
 caja.push(new Billete(20, 2));
 caja.push(new Billete(10, 2));
+caja.push(new Billete(5, 2));
+caja.push(new Billete(1, 20));
 
 let dinero = 60;
 let div = 0;
@@ -21,6 +24,7 @@ let b = document.getElementById("extraer");
 b.addEventListener("click", entregarDinero);
 
 function entregarDinero(){
+  let entregado = [];
   let t = document.getElementById("dinero");
   dinero = parseInt(t.value);
   for(let bi of caja){
@@ -42,9 +46,10 @@ function entregarDinero(){
     resultado.innerHTML = "No tengo billetes suficientes";
   }
   else{
+    resultado.innerHTML = "";
     for(let e of entregado){
       if(e.cantidad > 0){
-      resultado.innerHTML = resultado.innerHTML + e.cantidad + " billetes de $" + e.valor + "<br/>";
+        resultado.innerHTML += + e.cantidad + " billetes de $" + e.valor + "<br/>";
       }
     }
   }
