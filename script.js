@@ -16,7 +16,7 @@ caja.push(new Billete(10, 2));
 caja.push(new Billete(5, 2));
 caja.push(new Billete(1, 20));
 
-let dinero = 60;
+let dinero = 0;
 let div = 0;
 let papeles = 0;
 
@@ -44,21 +44,37 @@ function entregarDinero(){
       dinero = dinero - (bi.valor * papeles);
     }
   }
+
+  //Si NO hay suficientes billetes para despachar
   if (dinero > 0){
-    
-    resultado.innerHTML = "No tengo billetes suficientes";
+    resultado.innerHTML = "No tengo billetes suficientes para la operacion.";
   }
+
+  //Si hay suficientes billetes para despachar
   else{
-    resultado.innerHTML = "";
+    resultado.innerHTML = "Billetes despachados: <br/>";
     for(let e of entregado){
       if(e.cantidad > 0){
-        
         for(let i=0; i<e.cantidad; i++){
           resultado.innerHTML += "<img src=" + e.imagen.src + " height='100'/>";
         }
         resultado.innerHTML += "<br/>";
       }
     }
+
+    //Resta los billetes entregados a los billetes de caja
+    for (let c of caja){
+      for (let e of entregado){
+        if (c.valor == e.valor){
+          c.cantidad = c.cantidad - e.cantidad;
+        }
+      }
+    }
   }
-  
+
+  //Muestra el total de billetes disponible del cajero
+  resultado.innerHTML += "<hr/>Total de billetes disponibles: <br/>";
+    for (let c of caja){
+      resultado.innerHTML += c.cantidad + " billetes de " + c.valor + "<br/>";
+    }
 }
